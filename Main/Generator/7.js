@@ -23,10 +23,13 @@ function* take(number, iterable) {
   }
 }
 
-const values = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
-const result = take(3, map(filter(values, number => number % 2 === 0), number => number * 10));
+function* naturalNumbers() {
+  let number = 1;
+  while (true) {
+    yield number++;
+  }
+}
 
-/* lazy evaluation */
-console.log(result.next());
-console.log(result.next());
-console.log(result.next());
+const values = naturalNumbers();
+const result = take(17, map(filter(values, number => number % 2 === 0), number => number + 10));
+console.log([...result]);
